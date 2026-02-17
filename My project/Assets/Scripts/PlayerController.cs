@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float rotationSpeed = 200f;
     public GameObject projectilePrefab;
     public Transform firePoint;
 
@@ -14,8 +13,30 @@ public class PlayerController : MonoBehaviour
 
     void Rotate()
     {
-        float input = Input.GetAxisRaw("Horizontal"); 
-        transform.Rotate(Vector3.forward * -input * rotationSpeed * Time.deltaTime);
+        Vector2 input = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
+        );
+
+        if (input == Vector2.zero) return;
+
+        // Determine direction using directions
+        if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+        {
+            // Horizontal rotation
+            if (input.x > 0)
+                transform.rotation = Quaternion.Euler(0, 0, -90); // Right
+            else
+                transform.rotation = Quaternion.Euler(0, 0, 90); // Left
+        }
+        else
+        {
+            // Vertical rotations
+            if (input.y > 0)
+                transform.rotation = Quaternion.Euler(0, 0, 0); // Up
+            else
+                transform.rotation = Quaternion.Euler(0, 0, 180); // Down
+        }
     }
 
     void Shoot()
