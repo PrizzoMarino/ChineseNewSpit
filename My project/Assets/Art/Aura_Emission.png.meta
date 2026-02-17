@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: dbae6d77b01aa8143b73b011b6e582d5
+guid: 27cd692994ba3b74eb737b95999c4bc5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2141188580037841102
-    second: Aura_0
+      213: -7046445816291265333
+    second: Arena_Emission_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -55,9 +55,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 0
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Aura_0
+      name: Arena_Emission_0
       rect:
         serializedVersion: 2
-        x: 47
-        y: 47
-        width: 66
-        height: 66
+        x: 0
+        y: 0
+        width: 160
+        height: 160
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec057464ba707bd10800000000000000
-      internalID: 2141188580037841102
+      spriteID: bc4fbee1ddef53e90800000000000000
+      internalID: -7046445816291265333
       vertices: []
       indices: 
       edges: []
@@ -125,19 +125,17 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d4258c33fc071794a802d24e27bc106c
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 27cd692994ba3b74eb737b95999c4bc5, type: 3}
-      name: _Emission
+    secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Aura_0: 2141188580037841102
+      Arena_Emission_0: -7046445816291265333
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
