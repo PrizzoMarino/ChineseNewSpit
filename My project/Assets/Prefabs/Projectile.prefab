@@ -166,3 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  WrongAnimal: {fileID: 8300000, guid: 2ad05c33fa9bdf94a808bbdf3c52f01f, type: 3}
