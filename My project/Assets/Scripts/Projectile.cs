@@ -23,7 +23,6 @@ public class Projectile : MonoBehaviour
 
             GameManager.Instance.UpdateScoreUI();
 
-            enemy.PlayDeathSound();
             Destroy(enemy.gameObject);
             Destroy(gameObject);
 

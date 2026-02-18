@@ -128,8 +128,6 @@ public class GameManager : MonoBehaviour
         Enemy[] allEnemies = FindObjectsOfType<Enemy>();
         foreach (Enemy enemy in allEnemies)
         {
-            enemy.PlayDeathSound();
-
             Destroy(enemy.gameObject);
         }
     }

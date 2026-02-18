@@ -2306,6 +2306,9 @@ MonoBehaviour:
   tracks:
   - {fileID: 8300000, guid: f35388d11874b564ca026d2e965bffbf, type: 3}
   - {fileID: 8300000, guid: 6e472713407fa894b81449509f5581ad, type: 3}
+  minPitch: 1
+  maxPitch: 2
+  pitchRampDuration: 120
 --- !u!4 &1012235599
 Transform:
   m_ObjectHideFlags: 0
@@ -2334,7 +2337,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.145
+  m_Volume: 0.233
   m_Pitch: 1
   Loop: 0
   Mute: 0
