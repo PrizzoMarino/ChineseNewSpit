@@ -98,12 +98,12 @@ public class GameManager : MonoBehaviour
         GameObject enemyObj = Instantiate(
             enemyPrefab,
             spawnPoints[spawnIndex].position,
-            Quaternion.identity
+            spawnPoints[spawnIndex].rotation
         );
 
         Enemy enemy = enemyObj.GetComponent<Enemy>();
         enemy.zodiacType = (ZodiacType)Random.Range(0, 4);
-        enemy.SetColor();
+        enemy.SetSprite();
 
         // Increase speed over time (2x every 1min)
         float speedMultiplier = 1f + Time.timeSinceLevelLoad / 60f;
@@ -134,6 +134,10 @@ public class GameManager : MonoBehaviour
     public void UpdateScoreUI()
     {
         scoreText.text = "Score: " + score;
+    }
+    public bool IsGameOver()
+    {
+        return gameOver;
     }
 
     public void GameOver()

@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 351fdc1834b7250408d1c65e82be510f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - dragonSprite: {fileID: 1372335161102834277, guid: 47e675bed17ee724fba4234ea8029d80, type: 3}
+  - horseSprite: {fileID: -7501201644240826356, guid: 11c96715427145748a58cfcdb8f9fa8e, type: 3}
+  - roosterSprite: {fileID: -2843062148381276162, guid: c68c1a6716b1f8c4ea0b70685f77aba3, type: 3}
+  - pigSprite: {fileID: -9122695006515159614, guid: d0fa27b96e095a04ca3fe85dbe7ab3b1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance == null) return;
+        if (GameManager.Instance.IsGameOver()) return;
         Rotate();
         Shoot();
     }

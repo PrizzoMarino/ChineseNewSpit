@@ -21,24 +21,31 @@ public class Enemy : MonoBehaviour
         );
     }
 
-    public void SetColor()
+    public Sprite dragonSprite;
+    public Sprite horseSprite;
+    public Sprite roosterSprite;
+    public Sprite pigSprite;
+
+    public void SetSprite()
     {
-        // THIS IS ONLY FOR NOW
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
         switch (zodiacType)
         {
             case ZodiacType.Dragon:
-                sr.color = Color.red;
+                sr.sprite = dragonSprite;
                 break;
+
             case ZodiacType.Horse:
-                sr.color = Color.blue;
+                sr.sprite = horseSprite;
                 break;
+
             case ZodiacType.Rooster:
-                sr.color = Color.yellow;
+                sr.sprite = roosterSprite;
                 break;
+
             case ZodiacType.Pig:
-                sr.color = new Color(1f, 0.4f, 0.7f);
+                sr.sprite = pigSprite;
                 break;
         }
     }
