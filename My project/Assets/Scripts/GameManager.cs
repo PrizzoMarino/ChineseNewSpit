@@ -33,9 +33,11 @@ public class GameManager : MonoBehaviour
     private bool gameOver = false;
     public SpriteRenderer scoreRadiusSprite;
 
-    [Header("Audio")]
+    [Header("Game Over")]
     public AudioClip gameOverClip;
     private AudioSource audioSource;
+
+    public GameObject gameOverPanel;
 
     void Awake()
     {
@@ -208,7 +210,6 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
 
-        // Stop ongoing music for game over sound
         MusicManager music = FindObjectOfType<MusicManager>();
         if (music != null)
             music.StopMusic();
@@ -216,7 +217,12 @@ public class GameManager : MonoBehaviour
         if (gameOverClip != null)
             audioSource.PlayOneShot(gameOverClip);
 
-        gameOverText.SetActive(true);
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        if (gameOverText != null)
+            gameOverText.SetActive(true);
+
 
         Time.timeScale = 0f;
     }

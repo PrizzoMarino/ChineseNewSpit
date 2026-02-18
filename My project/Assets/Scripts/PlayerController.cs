@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -52,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
@@ -60,5 +63,6 @@ public class PlayerController : MonoBehaviour
                 audioSource.PlayOneShot(shootClip);
         }
     }
+
 
 }
