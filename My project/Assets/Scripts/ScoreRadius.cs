@@ -11,7 +11,9 @@ public class ScoreRadius : MonoBehaviour
         if (enemy.zodiacType == GameManager.Instance.currentYear)
         {
             GameManager.Instance.AddScore(10);
+            enemy.PlayDeathSound();
             Destroy(enemy.gameObject);
+
         }
     }
 }

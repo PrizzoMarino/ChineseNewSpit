@@ -5,6 +5,12 @@ public class Enemy : MonoBehaviour
     public ZodiacType zodiacType;
     public float speed = 2f;
 
+    [Header("Death Sounds")]
+    public AudioClip dragonDeath;
+    public AudioClip horseDeath;
+    public AudioClip roosterDeath;
+    public AudioClip pigDeath;
+
     private Transform player;
 
     void Start()
@@ -60,4 +66,34 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
+    public void PlayDeathSound()
+    {
+        AudioClip clip = null;
+
+        switch (zodiacType)
+        {
+            case ZodiacType.Dragon:
+                clip = dragonDeath;
+                break;
+
+            case ZodiacType.Horse:
+                clip = horseDeath;
+                break;
+
+            case ZodiacType.Rooster:
+                clip = roosterDeath;
+                break;
+
+            case ZodiacType.Pig:
+                clip = pigDeath;
+                break;
+        }
+
+        if (clip != null)
+        {
+            AudioSource.PlayClipAtPoint(clip, transform.position);
+        }
+    }
+
 }

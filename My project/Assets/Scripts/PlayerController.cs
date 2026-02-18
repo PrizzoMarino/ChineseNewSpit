@@ -5,6 +5,15 @@ public class PlayerController : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;
 
+    [Header("Audio")]
+    public AudioClip shootClip;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (GameManager.Instance == null) return;
@@ -46,6 +55,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+
+            if (shootClip != null)
+                audioSource.PlayOneShot(shootClip);
         }
     }
+
 }

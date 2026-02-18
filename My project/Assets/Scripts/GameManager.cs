@@ -17,8 +17,12 @@ public class GameManager : MonoBehaviour
     [Header("Spawning")]
     public GameObject enemyPrefab;
     public Transform[] spawnPoints;
+
     public float spawnRate = 1.5f;
+    public float minSpawnRate = 0.3f;
+
     private float spawnTimer;
+
 
     [Header("Score")]
     public int score = 0;
@@ -29,10 +33,16 @@ public class GameManager : MonoBehaviour
     private bool gameOver = false;
     public SpriteRenderer scoreRadiusSprite;
 
+    [Header("Audio")]
+    public AudioClip gameOverClip;
+    private AudioSource audioSource;
+
     void Awake()
     {
         Instance = this;
+        audioSource = GetComponent<AudioSource>();
     }
+
 
     void Start()
     {
@@ -79,11 +89,22 @@ public class GameManager : MonoBehaviour
     {
         spawnTimer += Time.deltaTime;
 
-        if (spawnTimer >= spawnRate)
+        float currentSpawnRate = GetCurrentSpawnRate();
+
+        if (spawnTimer >= currentSpawnRate)
         {
             spawnTimer = 0;
             SpawnEnemy();
         }
+    }
+
+    float GetCurrentSpawnRate()
+    {
+        float difficultyMultiplier = 1f + Time.timeSinceLevelLoad / 60f;
+
+        float scaledSpawnRate = spawnRate / difficultyMultiplier;
+
+        return Mathf.Clamp(scaledSpawnRate, minSpawnRate, spawnRate);
     }
 
     void SwapYear()
@@ -168,7 +189,19 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOver = true;
+
+        // Stop ongoing music for game over sound
+        MusicManager music = FindObjectOfType<MusicManager>();
+        if (music != null)
+            music.StopMusic();
+
+        if (gameOverClip != null)
+            audioSource.PlayOneShot(gameOverClip);
+
         gameOverText.SetActive(true);
+
         Time.timeScale = 0f;
     }
+
+
 }

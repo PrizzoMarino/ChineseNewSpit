@@ -167,6 +167,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zodiacType: 0
   speed: 1
+  dragonDeath: {fileID: 8300000, guid: 1cedbb6f161f23843aa4a4cf349fecff, type: 3}
+  horseDeath: {fileID: 8300000, guid: 5eec3bb72895df7448295688c99db48e, type: 3}
+  roosterDeath: {fileID: 8300000, guid: 8cd7ca4aa4c5a244abdb6811d1247482, type: 3}
+  pigDeath: {fileID: 8300000, guid: 4052eece162f604468e9e6a11ace6725, type: 3}
   dragonSprite: {fileID: 1372335161102834277, guid: 47e675bed17ee724fba4234ea8029d80, type: 3}
   horseSprite: {fileID: -7501201644240826356, guid: 11c96715427145748a58cfcdb8f9fa8e, type: 3}
   roosterSprite: {fileID: -2843062148381276162, guid: c68c1a6716b1f8c4ea0b70685f77aba3, type: 3}
