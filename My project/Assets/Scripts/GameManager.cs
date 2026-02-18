@@ -110,10 +110,22 @@ public class GameManager : MonoBehaviour
     void SwapYear()
     {
         currentYear = (ZodiacType)Random.Range(0, 4);
-        yearText.text = "YEAR OF THE: \n" + currentYear.ToString().ToUpper();
 
-        scoreRadiusSprite.color = GetColorForZodiac(currentYear);
+        Color animalColor = GetColorForZodiac(currentYear);
+
+        // Converting the color to HEX string for TMP (i love unity)
+        string hexColor = ColorUtility.ToHtmlStringRGB(animalColor);
+
+        yearText.text = $"YEAR OF THE: \n<color=#{hexColor}>{currentYear.ToString().ToUpper()}</color>";
+        
+        // Testing making the text grow and get smaller for effects sake
+        yearText.transform.localScale = Vector3.one * 1.5f;
+        LeanTween.scale(yearText.gameObject, Vector3.one, 0.3f).setEaseOutBack();
+
+
+        scoreRadiusSprite.color = animalColor;
     }
+
 
     void SpawnEnemy()
     {
