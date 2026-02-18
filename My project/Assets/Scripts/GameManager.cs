@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Year Settings")]
     public ZodiacType currentYear;
+    private ZodiacType previousYear;
     public float yearDuration = 10f;
     private float yearTimer;
 
@@ -66,13 +67,13 @@ public class GameManager : MonoBehaviour
     {
         // Year countdown
         float timeLeft = yearDuration - yearTimer;
-        YearTimerText.text = "Year ends in: " + Mathf.CeilToInt(timeLeft) + "s";
+        YearTimerText.text = "Year ends in: \n" + Mathf.CeilToInt(timeLeft) + "s";
 
         // Overall time passed
         int totalSeconds = Mathf.FloorToInt(Time.timeSinceLevelLoad);
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
-        OverallTimeText.text = string.Format("Time: {0:00}:{1:00}", minutes, seconds);
+        OverallTimeText.text = string.Format("Time: \n{0:00}:{1:00}", minutes, seconds);
     }
 
 
@@ -111,26 +112,37 @@ public class GameManager : MonoBehaviour
 
     void SwapYear()
     {
-        currentYear = (ZodiacType)Random.Range(0, 4);
+        ZodiacType newYear;
+
+        // Keep picking a random year until it's different from previous
+        do
+        {
+            newYear = (ZodiacType)Random.Range(0, 4);
+        }
+        while (newYear == previousYear);
+
+        currentYear = newYear;
+        previousYear = currentYear;
 
         Color animalColor = GetColorForZodiac(currentYear);
 
         // Converting the color to HEX string for TMP (i love unity)
         string hexColor = ColorUtility.ToHtmlStringRGB(animalColor);
         yearText.text = $"YEAR OF THE: \n<color=#{hexColor}>{currentYear.ToString().ToUpper()}</color>";
-        
-        // Testing making the text grow and get smaller for effects sake
+
         yearText.transform.localScale = Vector3.one * 1.5f;
         LeanTween.scale(yearText.gameObject, Vector3.one, 0.3f).setEaseOutBack();
 
         scoreRadiusSprite.color = animalColor;
 
+        // Destroy all enemies when year changes
         Enemy[] allEnemies = FindObjectsOfType<Enemy>();
         foreach (Enemy enemy in allEnemies)
         {
             Destroy(enemy.gameObject);
         }
     }
+
 
 
     void SpawnEnemy()
