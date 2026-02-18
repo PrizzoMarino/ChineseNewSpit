@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverText;
 
     private bool gameOver = false;
+    public SpriteRenderer scoreRadiusSprite;
 
     void Awake()
     {
@@ -89,6 +90,8 @@ public class GameManager : MonoBehaviour
     {
         currentYear = (ZodiacType)Random.Range(0, 4);
         yearText.text = "YEAR OF THE: \n" + currentYear.ToString().ToUpper();
+
+        scoreRadiusSprite.color = GetColorForZodiac(currentYear);
     }
 
     void SpawnEnemy()
@@ -124,6 +127,28 @@ public class GameManager : MonoBehaviour
 
         UpdateScoreUI();
     }
+
+    public Color GetColorForZodiac(ZodiacType type)
+    {
+        switch (type)
+        {
+            case ZodiacType.Dragon:
+                return Color.green;
+
+            case ZodiacType.Horse:
+                return new Color(0.6f, 0.3f, 0.1f);
+
+            case ZodiacType.Rooster:
+                return Color.yellow;
+
+            case ZodiacType.Pig:
+                return Color.magenta;
+
+            default:
+                return Color.white;
+        }
+    }
+
 
     public void AddScore(int amount)
     {

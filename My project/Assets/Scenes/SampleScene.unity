@@ -864,6 +864,7 @@ MonoBehaviour:
   scoreText: {fileID: 889111571}
   yearText: {fileID: 1649574546}
   gameOverText: {fileID: 434577818}
+  scoreRadiusSprite: {fileID: 794996445}
 --- !u!1 &761534506
 GameObject:
   m_ObjectHideFlags: 0
