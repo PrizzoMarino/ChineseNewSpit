@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;
 
-    [Header("Spit System")]
     [Header("Spit Settings")]
     public int maxSpit = 5;
     public int currentSpit = 5;
@@ -17,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public int waterClicksNeeded = 5;
     private int waterClicks = 0;
 
-
+    public Transform PlayerMouth;
     public int drinksNeeded = 5;
     private int currentDrinks = 0;
     private bool isRefilling = false;
@@ -168,7 +167,9 @@ public class PlayerController : MonoBehaviour
         if (isDrinking) yield break;
         isDrinking = true;
 
-        GameObject bottle = Instantiate(bottlePrefab, mouthPosition.position, Quaternion.identity, transform);
+        GameObject bottle = Instantiate(bottlePrefab, PlayerMouth.position, PlayerMouth.rotation);
+        bottle.transform.SetParent(PlayerMouth);
+        bottle.transform.localRotation = Quaternion.identity;
 
         if (drinkSound != null)
             AudioSource.PlayClipAtPoint(drinkSound, transform.position);
