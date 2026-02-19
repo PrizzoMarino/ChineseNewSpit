@@ -1,10 +1,23 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public Transform firePoint;
+
+    [Header("Spit System")]
+    public int maxSpit = 10;
+    public int currentSpit;
+
+    public int drinksNeeded = 5;
+    private int currentDrinks = 0;
+    private bool isRefilling = false;
+
+    [Header("Spit UI")]
+    public Image spitBarFill;
+
 
     [Header("Audio")]
     public AudioClip shootClip;
@@ -13,7 +26,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        currentSpit = maxSpit;
+        UpdateSpitUI();
     }
+
 
     void Update()
     {
@@ -21,6 +37,18 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.IsGameOver()) return;
         Rotate();
         Shoot();
+    }
+    void UpdateSpitUI()
+    {
+        if (spitBarFill == null) return;
+
+        float percent = (float)currentSpit / maxSpit;
+        spitBarFill.fillAmount = percent;
+
+        if (percent <= 0)
+            spitBarFill.color = Color.red;
+        else
+            spitBarFill.color = Color.cyan;
     }
 
     void Rotate()
@@ -57,12 +85,50 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            if (isRefilling) return;   // can't shoot while refilling
 
-            if (shootClip != null)
-                audioSource.PlayOneShot(shootClip);
+            if (currentSpit > 0)
+            {
+                Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+
+                currentSpit--;
+                UpdateSpitUI();
+
+                if (shootClip != null)
+                    audioSource.PlayOneShot(shootClip);
+
+                if (currentSpit <= 0)
+                {
+                    isRefilling = true;
+                    Debug.Log("Out of spit! Drink water!");
+                }
+            }
+            else
+            {
+                Debug.Log("No spit left!");
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (!isRefilling) return;
+
+            currentDrinks++;
+            Debug.Log("Drinking... " + currentDrinks + "/" + drinksNeeded);
+
+            if (currentDrinks >= drinksNeeded)
+            {
+                currentSpit = maxSpit;
+                UpdateSpitUI();
+
+                currentDrinks = 0;
+                isRefilling = false;
+
+                Debug.Log("Spit refilled!");
+            }
         }
     }
+
 
 
 }
