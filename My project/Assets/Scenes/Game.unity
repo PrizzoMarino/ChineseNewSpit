@@ -2276,6 +2276,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889111569}
   m_CullTransparentMesh: 1
+--- !u!1 &1001922864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1001922865}
+  m_Layer: 0
+  m_Name: PlayerMouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1001922865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001922864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.052, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1839753803}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1012235597
 GameObject:
   m_ObjectHideFlags: 0
@@ -3962,6 +3993,7 @@ Transform:
   m_Children:
   - {fileID: 1529197471}
   - {fileID: 792638487}
+  - {fileID: 1001922865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1839753804
@@ -4043,8 +4075,13 @@ MonoBehaviour:
   firePoint: {fileID: 1529197471}
   maxSpit: 10
   currentSpit: 0
+  waterClicksNeeded: 5
   drinksNeeded: 5
   spitBarFill: {fileID: 1686947990}
+  bottlePrefab: {fileID: 5673168791864962600, guid: f7462eca3fe95e046b77b22cad572f41, type: 3}
+  mouthPosition: {fileID: 1001922865}
+  drinkSound: {fileID: 8300000, guid: b876090d1e09d91469c40db387166b9f, type: 3}
+  drinkDuration: 0.5
   shootClip: {fileID: 8300000, guid: d7c9d1c4cc30cc14aacf4490605856fa, type: 3}
 --- !u!82 &1839753807
 AudioSource:

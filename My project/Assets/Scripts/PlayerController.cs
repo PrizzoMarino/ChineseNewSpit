@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,8 +9,14 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
 
     [Header("Spit System")]
-    public int maxSpit = 10;
-    public int currentSpit;
+    [Header("Spit Settings")]
+    public int maxSpit = 5;
+    public int currentSpit = 5;
+
+    [Header("Water refill")]
+    public int waterClicksNeeded = 5;
+    private int waterClicks = 0;
+
 
     public int drinksNeeded = 5;
     private int currentDrinks = 0;
@@ -17,6 +24,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Spit UI")]
     public Image spitBarFill;
+
+    [Header("Drinking")]
+    public GameObject bottlePrefab;
+    public Transform mouthPosition;
+    public AudioClip drinkSound;
+    public float drinkDuration = 0.5f;
+
+    private bool isDrinking = false;
 
 
     [Header("Audio")]
@@ -35,21 +50,40 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance == null) return;
         if (GameManager.Instance.IsGameOver()) return;
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (currentSpit == 0)
+            {
+                waterClicks++;
+                StartCoroutine(DrinkRoutine());
+
+                
+                if (waterClicks >= waterClicksNeeded)
+                {
+                    currentSpit = maxSpit;
+                    waterClicks = 0;
+                    UpdateSpitUI();
+                }
+            }
+            else
+            {
+                // If not at 0, allow normal refill or increment logic
+                currentSpit = Mathf.Min(currentSpit + 1, maxSpit);
+                UpdateSpitUI();
+                StartCoroutine(DrinkRoutine());
+            }
+        }
+
         Rotate();
         Shoot();
     }
-    void UpdateSpitUI()
+    public void UpdateSpitUI()
     {
-        if (spitBarFill == null) return;
-
-        float percent = (float)currentSpit / maxSpit;
-        spitBarFill.fillAmount = percent;
-
-        if (percent <= 0)
-            spitBarFill.color = Color.red;
-        else
-            spitBarFill.color = Color.cyan;
+        float fillAmount = (float)currentSpit / maxSpit;
+        spitBarFill.fillAmount = fillAmount;
     }
+
 
     void Rotate()
     {
@@ -128,6 +162,23 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    IEnumerator DrinkRoutine()
+    {
+        if (isDrinking) yield break;
+        isDrinking = true;
+
+        GameObject bottle = Instantiate(bottlePrefab, mouthPosition.position, Quaternion.identity, transform);
+
+        if (drinkSound != null)
+            AudioSource.PlayClipAtPoint(drinkSound, transform.position);
+
+        yield return new WaitForSeconds(drinkDuration);
+
+        Destroy(bottle);
+        isDrinking = false;
+    }
+
 
 
 
