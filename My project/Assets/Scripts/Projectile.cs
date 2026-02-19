@@ -17,20 +17,12 @@ public class Projectile : MonoBehaviour
 
         if (enemy != null)
         {
-            if (enemy.zodiacType == GameManager.Instance.currentYear)
-            {
-                GameManager.Instance.score -= 10; // shot the one allowed in
-                AudioSource.PlayClipAtPoint(WrongAnimal, transform.position);
-            }
-            else
-                GameManager.Instance.score += 5;  // shot the one not allowed in
-
-            GameManager.Instance.UpdateScoreUI();
+            GameManager.Instance.HandleEnemyShot(enemy);
 
             Destroy(enemy.gameObject);
             Destroy(gameObject);
-
         }
+
     }
 
 }

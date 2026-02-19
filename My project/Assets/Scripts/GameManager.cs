@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI yearText;
     public GameObject gameOverText;
 
+    [Header("Floating Text")]
+    public GameObject floatingTextPrefab;
+    public Canvas gameCanvas;
+
     private bool gameOver = false;
     public SpriteRenderer scoreRadiusSprite;
 
@@ -167,16 +171,26 @@ public class GameManager : MonoBehaviour
 
     public void HandleEnemyShot(Enemy enemy)
     {
+        Vector3 worldPosition = enemy.transform.position;
+
+        bool correct;
+        int points;
+
         if (enemy.zodiacType == currentYear)
         {
-            score -= 10; // Shot the one you should allow in
+            points = -10;
+            correct = false;
         }
         else
         {
-            score -= 5; // Shot the right one
+            points = 5;
+            correct = true;
         }
 
+        score += points;
         UpdateScoreUI();
+
+        ShowFloatingText(points, worldPosition, correct);
     }
 
     public Color GetColorForZodiac(ZodiacType type)
@@ -235,6 +249,42 @@ public class GameManager : MonoBehaviour
 
 
         Time.timeScale = 0f;
+    }
+
+    public void ShowFloatingText(int amount, Vector3 worldPosition, bool correct)
+    {
+        GameObject obj = Instantiate(floatingTextPrefab, gameCanvas.transform);
+
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
+        obj.transform.position = screenPosition;
+
+        FloatingText ft = obj.GetComponent<FloatingText>();
+
+        Color color = correct ? Color.green : Color.red;
+
+        ft.Setup(amount.ToString(), color);
+
+    }
+
+    public void HandleEnemyAura(Enemy enemy)
+    {
+        Vector3 worldPosition = enemy.transform.position;
+
+        bool correct = enemy.zodiacType == currentYear;
+        int points;
+
+        if (correct)
+        {
+            points = 10;
+        }
+        else
+        {
+            points = -5;
+        }
+
+        score += points;
+        UpdateScoreUI();
+        ShowFloatingText(points, worldPosition, correct);
     }
 
 

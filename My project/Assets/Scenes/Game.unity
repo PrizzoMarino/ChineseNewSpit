@@ -1268,6 +1268,8 @@ MonoBehaviour:
   scoreText: {fileID: 889111571}
   yearText: {fileID: 1649574546}
   gameOverText: {fileID: 434577818}
+  floatingTextPrefab: {fileID: 1454627290666962088, guid: 7ee2bee333ac9a047b34f49740f47254, type: 3}
+  gameCanvas: {fileID: 594130476}
   scoreRadiusSprite: {fileID: 794996445}
   gameOverClip: {fileID: 8300000, guid: 2ad05c33fa9bdf94a808bbdf3c52f01f, type: 3}
   gameOverPanel: {fileID: 1687777468}
