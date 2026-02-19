@@ -7,9 +7,13 @@ public class ScoreRadius : MonoBehaviour
         Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy == null) return;
 
-        GameManager.Instance.HandleEnemyAura(enemy);
-
-        enemy.PlayDeathSound();
-        Destroy(enemy.gameObject);
+        if (enemy.zodiacType == GameManager.Instance.currentYear)
+        {
+            GameManager.Instance.HandleEnemyAura(enemy);
+            enemy.PlayDeathSound();
+            Destroy(enemy.gameObject);
+        }
     }
+
+
 }

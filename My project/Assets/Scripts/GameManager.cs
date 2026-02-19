@@ -270,22 +270,13 @@ public class GameManager : MonoBehaviour
     {
         Vector3 worldPosition = enemy.transform.position;
 
-        bool correct = enemy.zodiacType == currentYear;
-        int points;
-
-        if (correct)
-        {
-            points = 10;
-        }
-        else
-        {
-            points = -5;
-        }
+        int points = 10;
 
         score += points;
         UpdateScoreUI();
-        ShowFloatingText(points, worldPosition, correct);
+        ShowFloatingText(points, worldPosition, true);
     }
+
 
 
 }
